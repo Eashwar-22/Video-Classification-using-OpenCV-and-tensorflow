@@ -1,0 +1,90 @@
+{% extends "layout.html" %}
+
+
+{% block titlebar %}
+<h1> {{heading}}</h1>
+{% endblock titlebar %}
+
+
+{% block main %}
+<div class="p-3">
+    <div class="card">
+        <div class="card-header">
+            Reference
+        </div>
+        <div class="card-body">
+            <samp>
+                <p>
+                    - https://colab.research.google.com/drive/1RtTYonaJ7ASX_ZMzcV3t_0jNktheKQF9?usp=sharing <br>
+                    - https://learnopencv.com/introduction-to-video-classification-and-human-activity-recognition <br>
+                    - https://bleedai.com/human-activity-recognition-using-tensorflow-cnn-lstm<br>
+                    - https://flask.palletsprojects.com/en/1.1.x/patterns/fileuploads/
+                </p>
+            </samp>
+        </div>
+    </div>
+    <hr/>
+    <h2> Using LRCN </h2>
+    <hr/>
+    <div class="card">
+        <div class="card-header">
+            Architecture
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-sm">
+                    <figure>
+                        <img src="/static/lrcn_arch.png" class="img-fluid" alt="Responsive image">
+                    </figure>
+                </div>
+                <div class="col-sm">
+                    <figure>
+                        <img src="/static/lrcn_imgarch.png" class="img-fluid" alt="Responsive image">
+                    </figure>
+                </div>
+            </div>
+        </div>
+    </div>
+    <hr/>
+    <div class="card">
+        <div class="card-header">
+            Model Definition
+        </div>
+        <div class="card-body">
+            <code>
+                model = Sequential() <br><br>
+
+
+                model.add(TimeDistributed(Conv2D(16, (3, 3), padding='same',activation = 'relu'),
+                                          input_shape = (SEQUENCE_LENGTH, IMAGE_HEIGHT, IMAGE_WIDTH, 3))) <br>
+                model.add(TimeDistributed(MaxPooling2D((4, 4)))) <br>
+                model.add(TimeDistributed(Dropout(0.25)))<br><br>
+
+                model.add(TimeDistributed(Conv2D(32, (3, 3), padding='same',activation = 'relu')))<br>
+                model.add(TimeDistributed(MaxPooling2D((4, 4))))<br>
+                model.add(TimeDistributed(Dropout(0.25)))<br><br>
+
+                model.add(TimeDistributed(Conv2D(64, (3, 3), padding='same',activation = 'relu')))<br>
+                model.add(TimeDistributed(MaxPooling2D((2, 2))))<br>
+                model.add(TimeDistributed(Dropout(0.25)))<br><br>
+
+                model.add(TimeDistributed(Conv2D(64, (3, 3), padding='same',activation = 'relu')))<br>
+                model.add(TimeDistributed(MaxPooling2D((2, 2))))<br><br>
+
+                model.add(TimeDistributed(Flatten()))<br><br>
+
+                model.add(LSTM(32))<br><br>
+
+                model.add(Dense(len(CLASSES_LIST), activation = 'softmax'))
+            </code>
+        </div>
+    </div>
+    <hr/>
+
+</div>
+</div>
+
+
+
+
+{% endblock main %}

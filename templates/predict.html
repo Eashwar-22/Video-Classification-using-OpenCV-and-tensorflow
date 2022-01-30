@@ -1,0 +1,84 @@
+{% extends "layout.html" %}
+
+{% block titlebar %}
+<div class="p-3" xmlns="http://www.w3.org/1999/html">
+    <h1> Prediction </h1>
+</div>
+{% endblock %}
+
+
+{% block main %}
+<div class="p-3 text-center">
+    <div class="btn-group" role="group" aria-label="Basic mixed styles example">
+      {% if action2=='BaseballPitch' %}
+       <button type="button" class="btn btn-info">BaseballPitch</button>
+      {% else %}
+        <button type="button" class="btn btn-secondary">BaseballPitch</button>
+      {% endif %}
+      {% if action2=='Biking' %}
+      <button type="button" class="btn btn-info">Biking</button>
+      {% else %}
+      <button type="button" class="btn btn-secondary">Biking</button>
+      {% endif %}
+      {% if action2=='Diving' %}
+      <button type="button" class="btn btn-info">Diving</button>
+      {% else %}
+      <button type="button" class="btn btn-secondary">Diving</button>
+      {% endif %}
+      {% if action2=='HighJump' %}
+      <button type="button" class="btn btn-info">HighJump</button>
+      {% else %}
+      <button type="button" class="btn btn-secondary">HighJump</button>
+      {% endif %}
+      {% if action2=='HorseRace' %}
+      <button type="button" class="btn btn-info">HorseRace</button>
+      {% else %}
+      <button type="button" class="btn btn-secondary">HorseRace</button>
+      {% endif %}
+    </div>
+</div>
+
+<div class="card text-center">
+  <div class="card-header">
+      <h3>Upload File</h3>
+  </div>
+  <div class="card-body">
+    <p class="card-text">(Only a short .mp4/.avi clip allowed)</p>
+     <form method=post enctype=multipart/form-data>
+         <input class="btn btn-secondary" type=file name=file><br><br>
+         <input class="btn btn-info" type=submit value=Upload>
+     </form>
+
+  </div>
+</div>
+
+<div class="p-3 text-center">
+    <div class="row">
+        <div class="col-sm">
+    <div class="card">
+        <div class="card-header">
+            <h3>ConvLSTM Model</h3>
+        </div>
+        <div class="card-body">
+            <h6>File Name        : {{filename}}</h6><br>
+            <h6>Action Predicted : {{action1}}</h6><br>
+            <h6>Confidence       : {{conf1}}</h6>
+        </div>
+    </div>
+        </div>
+    <div class="col-sm">
+    <div class="card">
+        <div class="card-header">
+            <h3>LRCN Model</h3>
+        </div>
+        <div class="card-body">
+            <h6>File Name        : {{filename}}</h6><br>
+            <h6>Action Predicted : <mark style="color:red;">{{action2}}</mark></h6><br>
+            <h6>Confidence       : <mark style="color:red;">{{conf2}}</mark></h6>
+        </div>
+    </div>
+    </div>
+    </div>
+
+</div>
+{% endblock main %}
